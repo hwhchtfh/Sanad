@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sanad App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Sanad - Assistive Health App</h1>
+
+  <div class="section">
+    <h2>1. Sign Language Detection</h2>
+    <button onclick="startCamera()">Start Camera</button>
+    <button onclick="stopCamera()">Stop Camera</button>
+    <video id="webcam" autoplay playsinline width="400" height="300"></video>
+    <div id="label-container" class="result-box"></div>
+  </div>
+
+  <div class="section">
+    <h2>2. Braille Converter</h2>
+    <input type="text" id="brailleInput" placeholder="Enter text..." />
+    <button onclick="convertToBraille()">Convert</button>
+    <pre id="brailleOutput" class="braille-box"></pre>
+  </div>
+
+  <div class="section">
+    <h2>3. Sanad AI Assistant</h2>
+    <textarea id="aiInput" placeholder="Ask something..."></textarea>
+    <button onclick="respondAI()">Send</button>
+    <div id="aiResponse" class="ai-box"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
