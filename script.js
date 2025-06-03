@@ -1,36 +1,55 @@
 const URL = "https://teachablemachine.withgoogle.com/models/Dm1vAU2b_/";
 
 let model, webcam, labelContainer, maxPredictions;
+let isCameraRunning = false;
 
-async function init() {
+async function initModel() {
   const modelURL = URL + "model.json";
   const metadataURL = URL + "metadata.json";
 
-  model = await tmImage.load(modelURL, metadataURL);
-  maxPredictions = model.getTotalClasses();
-
-  labelContainer = document.getElementById("label-container");
-  labelContainer.innerHTML = "";
-  for (let i = 0; i < maxPredictions; i++) {
-    labelContainer.appendChild(document.createElement("div"));
+  try {
+    model = await tmImage.load(modelURL, metadataURL);
+    maxPredictions = model.getTotalClasses();
+    labelContainer = document.getElementById("label-container");
+    labelContainer.innerHTML = "Model loaded. Ready to detect.";
+  } catch (err) {
+    document.getElementById("error-message").innerText = "Error loading model.";
+    console.error(err);
   }
 }
 
 async function startCamera() {
-  webcam = new tmImage.Webcam(400, 300, true);
-  await webcam.setup();
-  await webcam.play();
-  window.requestAnimationFrame(loop);
-  document.getElementById("webcam").replaceWith(webcam.canvas);
+  if (isCameraRunning) return;
+
+  try {
+    webcam = new tmImage.Webcam(400, 300, true);
+    await webcam.setup();
+    await webcam.play();
+    isCameraRunning = true;
+
+    const camContainer = document.getElementById("camera-container");
+    camContainer.innerHTML = '';
+    camContainer.appendChild(webcam.canvas);
+
+    window.requestAnimationFrame(loop);
+  } catch (err) {
+    document.getElementById("error-message").innerText = "Failed to access camera.";
+    console.error(err);
+  }
 }
 
 function stopCamera() {
-  if (webcam) {
+  if (webcam && isCameraRunning) {
     webcam.stop();
+    isCameraRunning = false;
+    document.getElementById("camera-container").innerHTML =
+      '<video id="webcam" autoplay playsinline width="400" height="300" style="display: none;"></video>';
+    document.getElementById("label-container").innerText = "Camera stopped.";
   }
 }
 
 async function loop() {
+  if (!isCameraRunning) return;
   webcam.update();
   await predict();
   window.requestAnimationFrame(loop);
@@ -39,7 +58,8 @@ async function loop() {
 async function predict() {
   const prediction = await model.predict(webcam.canvas);
   prediction.sort((a, b) => b.probability - a.probability);
-  labelContainer.innerHTML = prediction[0].className + " (" + Math.round(prediction[0].probability * 100) + "%)";
+  const result = prediction[0];
+  document.getElementById("label-container").innerText = `${result.className} (${Math.round(result.probability * 100)}%)`;
 }
 
 function convertToBraille() {
@@ -68,4 +88,4 @@ function respondAI() {
   document.getElementById("aiResponse").innerText = response;
 }
 
-init();
+initModel();
