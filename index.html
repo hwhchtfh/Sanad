@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Sanad App</title>
+  <title>Sanad - Complete Assistant</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -13,8 +13,11 @@
     <h2>1. Sign Language Detection</h2>
     <button onclick="startCamera()">Start Camera</button>
     <button onclick="stopCamera()">Stop Camera</button>
-    <video id="webcam" autoplay playsinline width="400" height="300"></video>
+    <div id="camera-container">
+      <video id="webcam" autoplay playsinline width="400" height="300" style="display: none;"></video>
+    </div>
     <div id="label-container" class="result-box"></div>
+    <div id="error-message" class="error-box"></div>
   </div>
 
   <div class="section">
