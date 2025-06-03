@@ -1,14 +1,14 @@
 body {
   font-family: Arial, sans-serif;
-  background: #eef2f7;
+  background: #f5faff;
   padding: 20px;
 }
 .section {
   background: #ffffff;
   padding: 20px;
+  margin: 20px 0;
   border-radius: 10px;
-  margin-top: 20px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 button {
   padding: 10px 20px;
@@ -28,8 +28,4 @@ textarea, input {
   background: #f2faff;
   padding: 10px;
   border-radius: 5px;
-}
-.error-box {
-  color: red;
-  font-weight: bold;
 }
