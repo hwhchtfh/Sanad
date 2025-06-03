@@ -2,22 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Sanad - Complete Assistant</title>
+  <title>Sanad - Full Integrated App</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Sanad - Assistive Health App</h1>
+  <h1>Sanad - Complete Assistive Health App</h1>
 
   <div class="section">
-    <h2>1. Sign Language Detection</h2>
+    <h2>1. Hand Sign Detection (👍 ✌️ 👌)</h2>
     <button onclick="startCamera()">Start Camera</button>
     <button onclick="stopCamera()">Stop Camera</button>
-    <div id="camera-container">
-      <video id="webcam" autoplay playsinline width="400" height="300" style="display: none;"></video>
-    </div>
-    <div id="label-container" class="result-box"></div>
-    <div id="error-message" class="error-box"></div>
+    <video id="webcam" autoplay playsinline width="640" height="480" style="display: none;"></video>
+    <canvas id="outputCanvas" width="640" height="480"></canvas>
+    <div id="handResult" class="result-box"></div>
   </div>
 
   <div class="section">
@@ -34,7 +32,9 @@
     <div id="aiResponse" class="ai-box"></div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
