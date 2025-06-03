@@ -1,0 +1,30 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #eef2f7;
+  padding: 20px;
+}
+.section {
+  background: #fff;
+  padding: 15px;
+  margin: 20px 0;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+button {
+  padding: 10px 15px;
+  margin: 5px;
+  cursor: pointer;
+}
+textarea, input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+}
+.result-box, .braille-box, .ai-box {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #005a9e;
+  background: #f2faff;
+  padding: 10px;
+  border-radius: 5px;
+}
